@@ -1,8 +1,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 @import "tailwindcss";
 @import "tw-animate-css";
+
+/* Para cambiar la fuente dentro del contenido de la página web <body>. */
+body {
+  font-family: "Redaction 10", sans-serif;
+}
+
+@font-face{
+  font-family: roman-antique-italic;
+  src: url(../fonts/RomanAntique-Italic__.ttf)
+}
 
 @custom-variant dark (&:is(.dark *));
 

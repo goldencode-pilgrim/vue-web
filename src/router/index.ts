@@ -8,27 +8,27 @@ export const router = createRouter ({
     history: createWebHashHistory(import.meta.env.BASE_URL),
     routes: [
       {
-        path: "/",
-        name: "home",
+        path: '/',
+        name: 'home',
         component: Domus
       },
       {
-        path: "/Pavluvs",
-        name: "Pavluvs",
+        path: '/Pavlvs',
+        name: 'Pavlvs',
         component: Pavlvs
       },
       {
-        path: "/Petrvs",
-        name: "Petrvs",
+        path: '/Petrvs',
+        name: 'Petrvs',
         component: Petrvs
       },
       {
-        path: "/dubitatio",
-        name: "dubitatio",
+        path: '/dubitatio',
+        name: 'dubitatio',
         component: dubitatio
       },
       {
-        path: "/:pathMatch(.*)*",
+        path: '/:pathMatch(.*)*',
         redirect: "/"
       }
     ]
