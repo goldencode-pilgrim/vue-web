@@ -25,56 +25,57 @@ const element = document.querySelector<HTMLElement>(sectionId);
 
 <!-- Código html  -->
 <template>
-    <div class="Pavlvs">
-    <div class="extra-nav">
+  <div class="Pavluvs">
+    <nav class="extra-nav flex flex-col sm:flex-row justify-between px-3">
+    </nav>
     <RouterLink to="/">
-    <House class="icon-home" />
+    <House class="[icon-home(), flex-col flex gap-4 justify-center mt-8 m-8 ]"/>
     </RouterLink>
+    
+    <NavigationMenu>
+      <!-- Esta etiqueta viene a ser un contenedor para los MenuItems -->
+      <NavigationMenuList class="flex-col sm:flex-row">  
+          <!-- Este es un MenuItem -->
+        <NavigationMenuItem>
+        <a href="#" @click.prevent="scrollToSection('#')">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+          Portada 
+        </NavigationMenuLink>
+        </a>
+        </NavigationMenuItem>
+        <!-- Aquí termina el MenuItem -->
+         
+        <NavigationMenuItem>
+          <!-- El emplear # en el href es para los enlaces dentro de las secciones de la propia página. -->
+        <a href="#itineraris"  @click.prevent="scrollToSection('#itineraris')">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+          Viajes
+          </NavigationMenuLink>
+        </a>
+        </NavigationMenuItem>
+  
+        <NavigationMenuItem>
+        <a href="#videre"  @click.prevent="scrollToSection('#videre')">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+          Imágenes
+          </NavigationMenuLink>
+        </a>
+        </NavigationMenuItem>
+  
+  <NavigationMenuItem>
+        <a href="#contactus" @click.prevent="scrollToSection('#contactus')">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+          Contacto
+        </NavigationMenuLink>
+      </a>
+    </NavigationMenuItem>
+    
+  </NavigationMenuList>
+  </NavigationMenu>
+
     </div>
 
-  <NavigationMenu>
-    <!-- Esta etiqueta viene a ser un contenedor para los MenuItems -->
-    <NavigationMenuList>  
-        <!-- Este es un MenuItem -->
-      <NavigationMenuItem>
-      <a href="#" @click.prevent="scrollToSection('#')">
-      <NavigationMenuLink :class="navigationMenuTriggerStyle">
-        Portada 
-      </NavigationMenuLink>
-      </a>
-      </NavigationMenuItem>
-      <!-- Aquí termina el MenuItem -->
-       
-      <NavigationMenuItem>
-        <!-- El emplear # en el href es para los enlaces dentro de las secciones de la propia página. -->
-      <a href="#itineraris"  @click.prevent="scrollToSection('#itineraris')">
-      <NavigationMenuLink :class="navigationMenuTriggerStyle">
-        Viajes
-        </NavigationMenuLink>
-      </a>
-      </NavigationMenuItem>
 
-      <NavigationMenuItem>
-      <a href="#videre"  @click.prevent="scrollToSection('#videre')">
-      <NavigationMenuLink :class="navigationMenuTriggerStyle">
-        Imágenes
-        </NavigationMenuLink>
-      </a>
-      </NavigationMenuItem>
-
-<NavigationMenuItem>
-      <a href="#contactus" @click.prevent="scrollToSection('#contactus')">
-      <NavigationMenuLink :class="navigationMenuTriggerStyle">
-        Contacto
-      </NavigationMenuLink>
-    </a>
-  </NavigationMenuItem>
-  
-</NavigationMenuList>
-</NavigationMenu>
-
-
-</div>
 
 
 <header class="titulus">
