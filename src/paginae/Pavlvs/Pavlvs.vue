@@ -9,6 +9,18 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+
+import { Card, CardContent } from '@/components/ui/card'
+
+import Autoplay from 'embla-carousel-autoplay'
+
 // Funció para hacer una animación de scroll suave al hacer click en un enlace de la barra de navegación.
 const scrollToSection = (sectionId: string) => {
     if (sectionId == "#"){
@@ -20,6 +32,8 @@ const element = document.querySelector<HTMLElement>(sectionId);
     element?.scrollIntoView({behavior: "smooth", block: "start"});
   }
 }
+
+const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamencvs","pavlvsicon2"]
 
 </script>
 
@@ -119,6 +133,38 @@ const element = document.querySelector<HTMLElement>(sectionId);
 
  </section>
 
+<section id="videre" class="flex w-full justify-center min-h-[60vh] mt-9 lg:min-h-[95vh] items-center bg-pink-950">
+<!-- <Carousel class="w-full max-w-xs"> -->
+<Carousel 
+class="w-full max-w-md md:max-w-0.5xl lg:max-w-0.05xl "
+ :opts="{
+ dragFree: true,
+ loop: true
+ }"
+    :plugins="[Autoplay({
+      delay: 2000,
+    })]"
+>
+    <CarouselContent>
+      <CarouselItem v-for="i in photos.length" :key="i">
+        <div class="p-1">
+          <Card class="bg-pink-950 border-none" >
+            <CardContent class="flex aspect-3/4 items-center justify-center p-6">
+              <img 
+              :src="`/imagines/Pavlvs/${photos[i - 1] }.jpg`"
+              class="w-full h-full object-cover"
+              :alt="`Imagen ${i} de Sanctvs Pavlvs`"
+              />
+            </CardContent>
+            </Card>
+        </div>
+      </CarouselItem>
+    </CarouselContent>
+    <CarouselPrevious class=" hidden md:flex justify-center items-center bg-pink-950 text-white " />
+    <CarouselNext class=" hidden md:flex justify-center items-center bg-pink-950 text-white " />
+  </Carousel>
+</section>
+
 </template>
 <!-- Para el códgio css -->
 <style scoped>
@@ -198,9 +244,8 @@ const element = document.querySelector<HTMLElement>(sectionId);
 
 #itineraris {
   max-width: 510px;
-  margin-bottom: 4rem;
-  margin: 0 auto;
-  padding: 4-rem 0;
+  margin: 0 auto 4rem;   /* 0 arriba · auto a los lados · 4rem abajo */
+  padding: 4rem 0;       /* antes: 4-rem 0 (inválido) */
   display: flex;
   flex-direction: column;
 }
