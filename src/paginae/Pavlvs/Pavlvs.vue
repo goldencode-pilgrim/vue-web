@@ -30,7 +30,7 @@ const element = document.querySelector<HTMLElement>(sectionId);
     <RouterLink to="/">
     <House class="icon-home" />
     </RouterLink>
-
+    </div>
 
   <NavigationMenu>
     <!-- Esta etiqueta viene a ser un contenedor para los MenuItems -->
@@ -47,7 +47,7 @@ const element = document.querySelector<HTMLElement>(sectionId);
        
       <NavigationMenuItem>
         <!-- El emplear # en el href es para los enlaces dentro de las secciones de la propia página. -->
-      <a href="#vehiculis"  @click.prevent="scrollToSection('#vehiculis')">
+      <a href="#itineraris"  @click.prevent="scrollToSection('#itineraris')">
       <NavigationMenuLink :class="navigationMenuTriggerStyle">
         Viajes
         </NavigationMenuLink>
@@ -65,60 +65,59 @@ const element = document.querySelector<HTMLElement>(sectionId);
 <NavigationMenuItem>
       <a href="#contactus" @click.prevent="scrollToSection('#contactus')">
       <NavigationMenuLink :class="navigationMenuTriggerStyle">
-       Contacto
-        </NavigationMenuLink>
-      </a>
-      </NavigationMenuItem>
+        Contacto
+      </NavigationMenuLink>
+    </a>
+  </NavigationMenuItem>
+  
+</NavigationMenuList>
+</NavigationMenu>
 
-    </NavigationMenuList>
-  </NavigationMenu>
+
+</div>
 
 
-    </div>
-    
+<header class="titulus">
+  <h1>Pavlvs</h1>
+  <div id="titulus-Pavlvs" class="titulus-img"></div>
+  <p>Él predica con tal ardor que enciende los corazones y golpea con  fuerza los espíritus malignos.</p>
+</header>
 
-    <header class="titulus">
-        <h1>Pavlvs</h1>
-        <div id="titulus-Pavlvs" class="titulus-img"></div>
-        <p>Él predica con tal ardor que enciende los corazones y golpea con  fuerza los espíritus malignos.</p>
-    </header>
-
-<section id="vehiculis">
-  <div class="vehiculis-arca">
+<section id="itineraris">
+  <div class="itineraris-titulus">
+    <h1>Viajes misioneros de Pablo</h1>
+  </div>
+  <div class="primo-itineraris">
     <div class="item unus">
         <div class="notitia">
-          <h2>Avión</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula vulputate elit eget fermentum. Ut laoreet ante lacus. Quisque ut tincidunt metus. Curabitur congue, arcu nec tempus sodales, neque sem ultrices mauris, eu tincidunt nibh nibh eu massa. Aenean rhoncus quis nibh ac facilisis.</p>
-          <small>Fabricado en 2005</small>
+          <h2>Primer viaje misionero (aprox. 46-48 d. C.)</h2>
+          <p><strong> •Acompañantes:</strong> Bernabé y Juan Marcos.
+            <strong>  •Ruta:</strong> Salió de Antioquía de Siria hacia la isla de Chipre y diversas regiones de Asia Menor (como Perge, Antioquía de Pisidia, Iconio, Listra y Derbe), regresando finalmente a Antioquía.</p>
+
         </div>
-        <img src="/imagines/batman/avion.jpg"/>
+        <img src="/imagines/Pavlvs/viajesanpablo1.png"/>
       </div>
 
       <div class="item duo">
         <div class="notitia">
-          <h2>Moto</h2>
-          <p>Nulla aliquip cupidatat voluptate veniam nostrud aliquip sit enim officia. Sit eu pariatur officia qui dolor adipisicing cupidatat. Sit consectetur et eu ut esse laboris nulla.</p>
-          <small>Fabricado en 2006</small>
+          <h2>Segundo viaje misionero (ca. 49-52 d. C.)</h2>
+          <p><strong>• Acompañantes:</strong> Junto a Silas (y más tarde Timoteo).<strong> •Ruta:</strong> Atravesó Cilicia, Frigia, Galacia y cruzó a Europa, fundando comunidades en Filipos, Tesalónica, Berea, Atenas y Corinto.</p>
         </div>
-        <img src="/imagines/batman/moto.jpg"/>
+        <img src="/imagines/Pavlvs/viajesanpablo2.png"/>
       </div>
       
       <div class="item tribus">
         <div class="notitia">
-          <h2>Coche</h2>
-          <p>Irure adipisicing est minim eu ad dolor. Eu ea commodo pariatur ut occaecat in cupidatat reprehenderit ut laborum duis. Sunt minim ex fugiat reprehenderit. Lorem consectetur reprehenderit commodo non</p>
-          <small>Fabricado en 2007</small>
+          <h2>Tercer viaje misionero (ca. 53–57 d. C.)</h2>
+          <p><strong>• Acompañantes:</strong> Pablo, junto con Timoteo y otros compañeros.<strong> •Ruta:</strong> Centrado en Asia Menor y Grecia, con una larga estancia de casi tres años en Éfeso, además de pasar por Macedonia y Corinto antes de regresar hacia Jerusalén.</p>
         </div>
-        <img src="/imagines/batman/car.jpg"/>
+        <small>Último viaje misionero antes del cautiverio y martirio.</small>
+        <img src="/imagines/Pavlvs/viajesanpablo3.png"/>
       </div>
     </div>
 
-    <div class="vehiculis-titulus">
-      <h1>Vehículos de Batman</h1>
-    </div>
  </section>
 
-    </div>
 </template>
 <!-- Para el códgio css -->
 <style scoped>
@@ -185,7 +184,7 @@ const element = document.querySelector<HTMLElement>(sectionId);
   width: 100%;
   text-align: center;
   font-size: 2rem;
-  color: white;
+  color: rgb(255, 255, 255);
   pointer-events:none;
   display:none; 
 }
@@ -196,47 +195,122 @@ const element = document.querySelector<HTMLElement>(sectionId);
     }
 }
 
-#vehiculis {
+#itineraris {
   max-width: 510px;
+  margin-bottom: 4rem;
   margin: 0 auto;
-  padding: 4rem 0;
+  padding: 4-rem 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.vehiculis-titulus {
+.itineraris > h1 {
+display: flex;
+ order: 1;
+ flex-direction: column;
+}
+
+.itineraris-titulus {
   height: 5.5rem; /* 88px */
   font-size: 2rem;
+  position: center;
   background-color: rgba(0, 0, 0, 0.7);
-  color: white;
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item {
-  padding: 1.5rem 0;
-  height: 500px;
+  padding: 1.rem 0;
+  height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
 }
 
 .unus {
-  background-color: rgba(220, 220, 220, 0.2) ; 
+  background-color: rgba(208, 151, 151, 0.2) ;
+  order: 1;
 }
 
 .duo {
-  background-color: rgba(220, 220, 220, 0.8);
-}
-
-.tribus {
-  background-color: rgba(220, 220, 220, 0.8);
-}
- 
-.notitia > small {
-  font-weight: bold;
-  padding: 1rem;
-}
- 
-.notitia > h2 {
- font-size: 1.7rem; 
- font-weight: 600;
- color: rgba(0, 0, 0, 0.7);
- padding-bottom: 1rem;
+  background-color: rgba(226, 197, 197, 0.8);
+  order: 2;
 } 
 
+.tribus {
+  background-color: rgba(191, 181, 181, 0.8);
+  order: 3;
+}
 
+.notitia{
+  width: 90%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item > img{
+ width: 500px;
+}
+
+.notitia > small {
+  font-weight: bold;
+  margin-top: 0.5 rem;
+  padding: 1.5rem;
+
+}
+ /* Título de la noticia */
+.notitia > h2 {
+ font-size: 1.3rem; 
+ font-weight: 600;
+ color: rgba(0, 0, 0, 0.9);
+} 
+
+@media (min-width: 640px) {
+  #itineraris {
+    max-width: 576px;
+  }
+}
+
+@media (min-width: 768px) {
+  #itineraris {
+    max-width: 900px;
+  }
+
+  .item{
+    flex-direction: row;
+    height: 320px;
+    margin-top: 10px;
+  }
+  .item > img {
+    height: 320px;
+  width: 500px;
+  }
+
+  .notitia {
+    width: 75%;
+  }
+ .duo > img {
+  order: -1
+ }
+}
+
+@media (min-width: 1024px){
+  #itineraris{
+    display: flex;
+    max-width: 1280px;
+    flex-direction: column;
+  } 
+  .notitia {
+    align-items: center;
+  }
+  .notitia > small {
+    order:5;
+    align-items: start;
+  }
+}
 </style>
