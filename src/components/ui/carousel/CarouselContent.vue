@@ -10,6 +10,8 @@ defineOptions({
 const props = defineProps<WithClassAsProps>()
 
 const { carouselRef, orientation } = useCarousel()
+// carouselRef solo se usa como template ref (ref="carouselRef"), que TS no cuenta como lectura → silenciamos TS6133.
+void carouselRef
 </script>
 
 <template>

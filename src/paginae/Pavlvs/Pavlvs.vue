@@ -8,51 +8,36 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import CarrusImaginum from '@/components/CarrusImaginum.vue';
+import { scrollToSection } from '@/utils/ScrollToSection';
+import { ref } from 'vue';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
-
-import { Card, CardContent } from '@/components/ui/card'
-
-import Autoplay from 'embla-carousel-autoplay'
 
 // Funció para hacer una animación de scroll suave al hacer click en un enlace de la barra de navegación.
-const scrollToSection = (sectionId: string) => {
-    if (sectionId == "#"){
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return
-    }
-const element = document.querySelector<HTMLElement>(sectionId);
-  if (element) {
-    element?.scrollIntoView({behavior: "smooth", block: "start"});
-  }
-}
+
 
 const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamencvs","pavlvsicon2"]
+
+const videreMenu = ref<boolean>(true)
+
 
 </script>
 
 <!-- Código html  -->
 <template>
   <div class="Pavluvs">
-    <nav class="extra-nav flex flex-col sm:flex-row justify-between px-3">
-    </nav>
-    <RouterLink to="/">
-    <House class="[icon-home(), flex-col flex gap-4 justify-center mt-8 m-8 ]"/>
+  <nav class="extra-nav flex items-center justify-between px-4">
+    <RouterLink to="/" aria-label="Volver a la portada">
+      <House class="size-9 text-brand-purple hover:text-brand-purple-dark transition-colors" />
     </RouterLink>
     
     <NavigationMenu>
       <!-- Esta etiqueta viene a ser un contenedor para los MenuItems -->
-      <NavigationMenuList class="flex-col sm:flex-row">  
+      <NavigationMenuList class="flex-col sm:flex-row justify-end gap-2 sm:gap-4">  
           <!-- Este es un MenuItem -->
         <NavigationMenuItem>
         <a href="#" @click.prevent="scrollToSection('#')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
           Portada 
         </NavigationMenuLink>
         </a>
@@ -62,7 +47,7 @@ const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamenc
         <NavigationMenuItem>
           <!-- El emplear # en el href es para los enlaces dentro de las secciones de la propia página. -->
         <a href="#itineraris"  @click.prevent="scrollToSection('#itineraris')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
           Viajes
           </NavigationMenuLink>
         </a>
@@ -70,7 +55,7 @@ const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamenc
   
         <NavigationMenuItem>
         <a href="#videre"  @click.prevent="scrollToSection('#videre')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
           Imágenes
           </NavigationMenuLink>
         </a>
@@ -78,7 +63,7 @@ const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamenc
   
   <NavigationMenuItem>
         <a href="#contactus" @click.prevent="scrollToSection('#contactus')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors']">
+        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
           Contacto
         </NavigationMenuLink>
       </a>
@@ -87,6 +72,8 @@ const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamenc
   </NavigationMenuList>
   </NavigationMenu>
 
+  </nav>
+    
     </div>
 
 
@@ -135,34 +122,13 @@ const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamenc
 
 <section id="videre" class="flex w-full justify-center min-h-[60vh] mt-9 lg:min-h-[95vh] items-center bg-pink-950">
 <!-- <Carousel class="w-full max-w-xs"> -->
-<Carousel 
-class="w-full max-w-md md:max-w-0.5xl lg:max-w-0.05xl "
- :opts="{
- dragFree: true,
- loop: true
- }"
-    :plugins="[Autoplay({
-      delay: 2000,
-    })]"
->
-    <CarouselContent>
-      <CarouselItem v-for="i in photos.length" :key="i">
-        <div class="p-1">
-          <Card class="bg-pink-950 border-none" >
-            <CardContent class="flex aspect-3/4 items-center justify-center p-6">
-              <img 
-              :src="`/imagines/Pavlvs/${photos[i - 1] }.jpg`"
-              class="w-full h-full object-cover"
-              :alt="`Imagen ${i} de Sanctvs Pavlvs`"
-              />
-            </CardContent>
-            </Card>
-        </div>
-      </CarouselItem>
-    </CarouselContent>
-    <CarouselPrevious class=" hidden md:flex justify-center items-center bg-pink-950 text-white " />
-    <CarouselNext class=" hidden md:flex justify-center items-center bg-pink-950 text-white " />
-  </Carousel>
+  <!-- La sección llama al componente "<CarrusImaginum>" ahorrando espacio de código y tiempo -->
+ <CarrusImaginum
+  :photos="photos"
+   basePath="/imagines/Pavlvs"
+  :autoplayDelay="1500"
+/>
+
 </section>
 
 </template>
@@ -181,24 +147,16 @@ class="w-full max-w-md md:max-w-0.5xl lg:max-w-0.05xl "
     background-color: crimson;
 }
 
+/* Barra de navegación blanca a todo el ancho, como en la imagen de referencia. */
 .extra-nav {
-  background-color: rgb(153, 23, 23);
-  opacity: 0.7;
-  box-shadow: rgba(0, 0, 0, 0.7);
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   position: fixed;
   top: 0;
-  width: 11rem;
-  border-radius: 0 0 1rem 0;
-  z-index: 1;
-}
-
-@media (min-width: 640px){
-  .extra-nav {
-    width: 100%;
-    border-radius: 0;
-    opacity: 1;
-    left: 0;
-  }
+  left: 0;
+  width: 100%;
+  min-height: 3.5rem;
+  z-index: 20;
 }
 
 .titulus-img {
