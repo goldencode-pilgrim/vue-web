@@ -1,6 +1,6 @@
 <!-- Lenguaje ts para el códgio js -->
 <script lang="ts" setup>
-import { House } from '@lucide/vue';
+import { House, Menu } from '@lucide/vue';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/navigation-menu'
 import CarrusImaginum from '@/components/CarrusImaginum.vue';
 import { scrollToSection } from '@/utils/ScrollToSection';
-import { ref } from 'vue';
-
+import { onMounted, ref } from 'vue';
+import { Toggle } from '@/components/ui/toggle'
 
 // Funció para hacer una animación de scroll suave al hacer click en un enlace de la barra de navegación.
 
@@ -20,20 +20,43 @@ const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamenc
 
 const videreMenu = ref<boolean>(true)
 
+const handleResize = () => {
+  if (window.innerWidth <= 640) {
+    videreMenu.value = false
+  } else {
+    videreMenu.value = true
+  }
+}
+
+onMounted(() => {
+  handleResize()
+  window.addEventListener('resize', handleResize)
+})
+
 
 </script>
 
 <!-- Código html  -->
 <template>
   <div class="Pavluvs">
+   <Toggle
+        class="fixed top-2 right-4 z-50 bg-slate-500 sm:hidden"
+        v-model="videreMenu"
+        >
+        <Menu />
+      </Toggle>
+      
   <nav class="extra-nav flex items-center justify-between px-4">
-    <RouterLink to="/" aria-label="Volver a la portada">
-      <House class="size-9 text-brand-purple hover:text-brand-purple-dark transition-colors" />
-    </RouterLink>
+    <div class="flex items-center gap-2">
+   
+      <RouterLink to="/" aria-label="Volver a la portada">
+        <House class="size-9 text-brand-purple hover:text-brand-purple-dark transition-colors" />
+      </RouterLink>
+    </div>
     
-    <NavigationMenu>
+    <NavigationMenu :class="['max-sm:max-w-full', videreMenu ? '' : 'max-sm:hidden']">
       <!-- Esta etiqueta viene a ser un contenedor para los MenuItems -->
-      <NavigationMenuList class="flex-col sm:flex-row justify-end gap-2 sm:gap-4">  
+      <NavigationMenuList class="flex-1 sm:flex-none flex-col sm:flex-row justify-end gap-2 sm:gap-4 items-start pt-12 sm:pt-0">  
           <!-- Este es un MenuItem -->
         <NavigationMenuItem>
         <a href="#" @click.prevent="scrollToSection('#')">
