@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Domus from "../paginae/domus/Domus.vue";
 import Pavlvs from "../paginae/Pavlvs/Pavlvs.vue"; 
-import Petrvs from "../paginae/Petrvs/Petrvs.vue";
+import Simpsons from "../paginae/Simpsons/Simpsons.vue";
 import dubitatio from "../paginae/responsum/Responsum.vue";
 export const router = createRouter ({
     //historio almacena el  historial de navegación url
@@ -18,9 +18,9 @@ export const router = createRouter ({
         component: Pavlvs
       },
       {
-        path: '/Petrvs',
-        name: 'Petrvs',
-        component: Petrvs
+        path: '/Simpsons',
+        name: 'Simpsons',
+        component: Simpsons
       },
       {
         path: '/dubitatio',

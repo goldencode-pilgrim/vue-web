@@ -12,7 +12,7 @@ import Button from '@/components/ui/button/Button.vue';
   
   
   <Button  variant="domus" class="mr-2">
-    <RouterLink to='/Petrvs'>Petrvs</RouterLink>
+    <RouterLink to='/Simpsons'>Simpsons</RouterLink>
   </Button>
   
   <Button  variant="domus" class="mr-2">
