@@ -1,7 +1,7 @@
 <!-- Lenguaje ts para el códgio js -->
 <script lang="ts" setup>
 
-
+import { ref } from 'vue';
 import CarrusImaginum from '@/components/CarrusImaginum.vue';
 import { scrollToSection } from '@/utils/ScrollToSection';
 import { useMouseMotio } from '@/compossables/useMouseMotio';
@@ -15,8 +15,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-// Funció para hacer una animación de scroll suave al hacer click en un enlace de la barra de navegación.
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import type { DateValue } from 'reka-ui';
 
+const dies = ref<DateValue>()
 
 const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamencvs","pavlvsicon2"]
 
@@ -159,26 +167,24 @@ const Menuitems = [
 
           <div class="space-y-2">
 
-               <Select>
+               <Select required>
                  <SelectTrigger>
-                  <SelectValue placeholder="Select a fruit" />
+                  <SelectValue placeholder="Select una misión" />
                   </SelectTrigger>
                    <SelectContent>
-                     <SelectItem value="apple">
-                        Apple
+                     <SelectItem value="eleemosyna">
+                        Limosna a los pobres
                      </SelectItem>
-                     <SelectItem value="banana">
-                         Banana
+                     <SelectItem value="investigare">
+                        Investigación de corrupción eclesiástica
                      </SelectItem>
-                     <SelectItem value="blueberry">
-                        Blueberry
+                     <SelectItem value="iustitia">
+                        Ayudar a una victima del sistema judicial
                      </SelectItem>
-                     <SelectItem value="grapes">
-                         Grapes
+                     <SelectItem value="defendere">
+                         Defensa de los inocentes
                      </SelectItem>
-                     <SelectItem value="pineapple">
-                       Pineapple
-                     </SelectItem>
+                    
                    </SelectContent>
                 </Select>
 
@@ -186,7 +192,22 @@ const Menuitems = [
 
           <div class="space-y-2">
 
-            Poner un calendario para la fecha de la misión
+             <Label>Fecha de la misión</Label>
+              <Popover>
+                <PopoverTrigger as-child>
+                   <Button variant="outline">
+                    <span v-if="dies">
+                     {{ dies.day }}/{{ dies.month }}/{{ dies.year }}
+                    </span>
+                     <span v-else class="text-gray-500">
+                      Selecciona una fecha
+                    </span>
+                   </Button>
+                </PopoverTrigger>
+                 <PopoverContent class="m-auto p-0"> 
+                  <Calendar v-model="dies" />
+                </PopoverContent>
+              </Popover>
 
           </div>
 
