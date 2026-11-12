@@ -1,18 +1,11 @@
 <!-- Lenguaje ts para el códgio js -->
 <script lang="ts" setup>
-import { House, Menu } from '@lucide/vue';
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu'
+
+
 import CarrusImaginum from '@/components/CarrusImaginum.vue';
 import { scrollToSection } from '@/utils/ScrollToSection';
-import { onMounted, onUnmounted, ref } from 'vue';
-import { Toggle } from '@/components/ui/toggle'
-import { useMouseMotio } from '@/composables/useMouseMotio';
+import { useMouseMotio } from '@/compossables/useMouseMotio';
+import NavigatorPrimarius from '@/components/ui/NavigatorPrimarius.vue';
 
 // Funció para hacer una animación de scroll suave al hacer click en un enlace de la barra de navegación.
 
@@ -20,89 +13,36 @@ import { useMouseMotio } from '@/composables/useMouseMotio';
 const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamencvs","pavlvsicon2"]
 
 const {mousePositione, cumMouseMove,cumMouseLeave} = useMouseMotio()
-
-const videreMenu = ref<boolean>(true)
-
-const handleResize = () => {
-  if (window.innerWidth <= 640) {
-    videreMenu.value = false
-  } else {
-    videreMenu.value = true
-  }
-}
-
-onMounted(() => {
-  handleResize()
-  window.addEventListener('resize', handleResize)
-})
-// Para que la anterior orden deje de ejecutarse al salir de la página.
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-})
-
-
+// Estos items hay que colocarlos para que el navegador sepa con los datos que se va onpointerrawupdate, esto para cualquier página que qerramos crear
+const Menuitems = [
+  {
+    label: 'Portada',
+    href: '#',
+    onClick: () => scrollToSection('#')
+  },
+  {
+    label: 'Viajes',
+    href: '#itineraris',
+    onClick: () => scrollToSection('#itineraris')
+  },
+  {
+    label: 'Videre',
+    href: '#videre',
+    onClick: () => scrollToSection('#videre')
+  },
+  {
+    label: 'Contacto',
+    href: '#contactus',
+    onClick: () => scrollToSection('#contactus')
+  },
+  
+]
 </script>
 
 <!-- Código html  -->
 <template>
   <div class="Pavluvs">
-   <Toggle
-        class="fixed top-2 right-4 z-50 bg-slate-500 sm:hidden"
-        v-model="videreMenu"
-        >
-        <Menu />
-      </Toggle>
-      
-  <nav class="extra-nav flex items-center justify-between px-4">
-    <div class="flex items-center gap-2">
-   
-      <RouterLink to="/" aria-label="Volver a la portada">
-        <House class="size-9 text-brand-purple hover:text-brand-purple-dark transition-colors" />
-      </RouterLink>
-    </div>
-    
-    <NavigationMenu :class="['max-sm:max-w-full', videreMenu ? '' : 'max-sm:hidden']">
-      <!-- Esta etiqueta viene a ser un contenedor para los MenuItems -->
-      <NavigationMenuList class="flex-1 sm:flex-none flex-col sm:flex-row justify-end gap-2 sm:gap-4 items-start pt-12 sm:pt-0">  
-          <!-- Este es un MenuItem -->
-        <NavigationMenuItem>
-        <a href="#" @click.prevent="scrollToSection('#')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
-          Portada 
-        </NavigationMenuLink>
-        </a>
-        </NavigationMenuItem>
-        <!-- Aquí termina el MenuItem -->
-         
-        <NavigationMenuItem>
-          <!-- El emplear # en el href es para los enlaces dentro de las secciones de la propia página. -->
-        <a href="#itineraris"  @click.prevent="scrollToSection('#itineraris')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
-          Viajes
-          </NavigationMenuLink>
-        </a>
-        </NavigationMenuItem>
-  
-        <NavigationMenuItem>
-        <a href="#videre"  @click.prevent="scrollToSection('#videre')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
-          Imágenes
-          </NavigationMenuLink>
-        </a>
-        </NavigationMenuItem>
-  
-  <NavigationMenuItem>
-        <a href="#contactus" @click.prevent="scrollToSection('#contactus')">
-        <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-base hover:bg-brand-purple hover:text-white transition-colors']">
-          Contacto
-        </NavigationMenuLink>
-      </a>
-    </NavigationMenuItem>
-    
-  </NavigationMenuList>
-  </NavigationMenu>
-
-  </nav>
+   <NavigatorPrimarius :items="Menuitems" homeRoute="/" />
     
     </div>
 
@@ -179,27 +119,7 @@ onUnmounted(() => {
 .pavlvs{
     font-family: Arial, Heveltica, sans-serif;
 }
-.icon-home{
-    color: cornflowerblue;
-    width: 3rem;
-    height: 3rem;
-}
-.icon-home:hover{
-    color:bisque white;
-    background-color: crimson;
-}
 
-/* Barra de navegación blanca a todo el ancho, como en la imagen de referencia. */
-.extra-nav {
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 3.5rem;
-  z-index: 20;
-}
 
 .titulus-img {
   background-size: 100% 100%;
