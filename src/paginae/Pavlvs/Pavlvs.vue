@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import CarrusImaginum from '@/components/CarrusImaginum.vue';
 import { scrollToSection } from '@/utils/ScrollToSection';
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { Toggle } from '@/components/ui/toggle'
 
 // Funció para hacer una animación de scroll suave al hacer click en un enlace de la barra de navegación.
@@ -18,7 +18,17 @@ import { Toggle } from '@/components/ui/toggle'
 
 const photos =["pavlvsbarroco", "pavlvsicon","pavlvsrenacimiento","pavlvsflamencvs","pavlvsicon2"]
 
+interface Coordinatas {
+  x: number
+  y: number
+}
+
 const videreMenu = ref<boolean>(true)
+
+const mousePositione = ref<Coordinatas>({
+  x: 0,
+  y: 0
+})
 
 const handleResize = () => {
   if (window.innerWidth <= 640) {
@@ -32,7 +42,32 @@ onMounted(() => {
   handleResize()
   window.addEventListener('resize', handleResize)
 })
+// Para que la anterior orden deje de ejecutarse al salir de la página.
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 
+const cumMouseMove =(e: MouseEvent) => {
+  const rect = (e.target as HTMLElement).getBoundingClientRect()
+
+  const centerX = rect.left + rect.width / 2
+  const centerY = rect.top + rect.height / 2
+
+  const mouseX =e.clientX - rect.left
+  const mouseY =e.clientY - rect.top
+
+  mousePositione.value = {
+    x: (centerX - mouseX) * 0.1,
+    y: (centerY - mouseY) * 0.1
+  }
+}
+
+const cumMouseLeave = () =>{
+  mousePositione.value = {
+    x: 0,
+    y: 0
+  }
+}
 
 </script>
 
@@ -104,7 +139,19 @@ onMounted(() => {
 
 <header class="titulus">
   <h1>Pavlvs</h1>
-  <div id="titulus-Pavlvs" class="titulus-img"></div>
+  <div 
+  id="titulus-Pavlvs" 
+  class="titulus-img"
+  @mousemove="cumMouseMove"
+  @mouseleave="cumMouseLeave"
+  :style="{
+    backgroundPositionX: `calc(50% + ${mousePositione.x}px)`,
+    backgroundPositionY: `calc(50% + ${mousePositione.y}px)`,
+    transition:'background-position 0,1s ease-out'
+
+  }"
+  >
+  </div>
   <p>Él predica con tal ardor que enciende los corazones y golpea con  fuerza los espíritus malignos.</p>
 </header>
 
@@ -186,7 +233,7 @@ onMounted(() => {
   background-size: 100% 100%;
   background-position: center center;
   background-image: url("../imagines/Pavlvs/St Paul - Private Collection.jpeg");
-  min-height: 100vh;
+ aspect-ratio: 8/9 ;
 }
 
 
