@@ -3,6 +3,10 @@ import Domus from "../paginae/domus/Domus.vue";
 import Pavlvs from "../paginae/Pavlvs/Pavlvs.vue"; 
 import Primus from "../paginae/Simpsons/Primus.vue";
 import dubitatio from "../paginae/responsum/Responsum.vue";
+import Layaout from "@/paginae/Simpsons/Layaout.vue";
+import Circa from "@/paginae/Simpsons/Circa.vue";
+import Colectione from "@/paginae/Simpsons/Colectione.vue";
+import Character from "@/paginae/Simpsons/Character.vue";
 export const router = createRouter ({
     //historio almacena el  historial de navegación url
     history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -19,8 +23,45 @@ export const router = createRouter ({
       },
       {
         path: '/Simpsons',
-        name: 'Simpsons',
-        component: Primus
+        children: [
+          {
+           path: "", //simpons
+           name: 'simpsons',
+           component: Primus
+
+          },
+
+          {
+          path: "about",
+          component: Layaout,
+          children: [
+            {
+               path: "", //simpons/about
+           name: 'simpsons-about',
+           component: Circa
+            }
+          ]
+          },
+           {
+          path: "gallery",
+          component: Layaout,
+          children: [
+            {
+               path: "", 
+           name: 'simpsons-characters', //simpsons/gallery
+           component: Colectione
+            },
+            {
+              // Los ":" en el nombre del path indican que es una dirección dinámica, que cambiará.
+              path:':id', //simpsons/gallery/[homer, etc.]
+              name: 'simpsons-character',
+              component: Character
+            }
+          ]
+        }
+        ]
+         
+        
       },
       {
         path: '/dubitatio',
