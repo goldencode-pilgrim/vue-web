@@ -3,9 +3,12 @@ import {Card,CardContent,} from '@/components/ui/card'
 import { ref, computed } from 'vue';
 import { characters, type Character } from './data';
 import { CopySlash } from '@lucide/vue';
+import { useRouter } from 'vue-router';
 // El componente Character.vue se usará más adelante en la página de detalle (/simpsons/gallery/:id).
 // Aquí no se usa todavía: lo comento para que no dé error de "import sin usar".
 // import CharacterCard from './Character.vue';
+
+const router = useRouter()
 
 const inPagina =6
 
@@ -47,7 +50,9 @@ const paginaNumeri: number[] = [...Array(totalPaginae)].map((_, i) => i + 1)
           :key="character.id"
           class="cursor-pointer w-[220px] h-[240px] hover:bg-simpsons-red hover:text-white transition-colors"
           >
-            <CardContent class="flex h-full flex-col items-center justify-center gap-2 px-2">
+            <CardContent 
+            @click="router.push(`/simpsons/gallery/${character.id}`)"
+            class="flex h-full flex-col items-center justify-center gap-2 px-2">
              <img
              class="h-[160px] w-[160px] object-cover object-top rounded-t-md border border-black bg-simpsons-yellow"
              :src="`/imagines/simpsons/${character.imago}`"
