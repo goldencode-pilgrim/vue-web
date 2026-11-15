@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import Button from '@/components/ui/button/Button.vue';
 import LogoSimpsons from '@/components/ui/LogoSimpsons.vue';
+import { Heart } from '@lucide/vue';
+import { useFavoritosStore,  } from '@/stores/useFavoritos';
+const favoritosStore = useFavoritosStore ()
 
 </script>
-
+ 
 
 <template>
     <div class="bg-simpsons-yellow min-h-screen text-center p-4 flex flex-col items-center justify-center">
@@ -23,6 +26,13 @@ import LogoSimpsons from '@/components/ui/LogoSimpsons.vue';
     	<Button variant="tertuarius" size ="elogantis">
       		<RouterLink to="/simpsons/about">Enter</RouterLink>
     	</Button>
+		<div class="flex items-center gap-2 text-black ">
+           <Heart class="w-7 h-7 fill-simpsons-red"/>
+           <span>
+			{{ favoritosStore.totalFavoritos }}
+		   </span>
+		</div>
+
 	</div>
     <div>
 

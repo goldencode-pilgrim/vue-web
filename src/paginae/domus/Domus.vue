@@ -11,7 +11,9 @@ import {
 import { Input } from '@/components/ui/input'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-
+import { Heart } from '@lucide/vue';
+import { useFavoritosStore } from '@/stores/useFavoritos';
+import { storeToRefs } from 'pinia';
 const dialogApertaEst = ref<boolean>(false)
 
 const quaestio =ref<string>("")
@@ -38,6 +40,8 @@ const cumKeyPresumEnter = (eventus: KeyboardEvent) => {
  }
 }
 
+const favoritosStore = useFavoritosStore ()
+const {totalFavoritos} = storeToRefs(favoritosStore)
 
 </script>
 
@@ -86,6 +90,16 @@ const cumKeyPresumEnter = (eventus: KeyboardEvent) => {
   
   <Button  variant="domus" class="mr-2">
     <a href='https://catholic.net/'>Catholicnet</a>
+  </Button>
+
+  <Button  variant="default" class=" relative mr-2 bg-simpsons-red md:py-5 md:px-6 md:text-lg hover:bg-simpsons-red/80 transition-all">
+     <RouterLink class="flex items-center gap-2" to=''>
+      Favoritos
+      <span class="absolute -top-1 -right-2 w-6.5 h-6.5 bg-yellow-400 text-black text-base font-bold rounded-full flex items-center justify-center">
+        {{ totalFavoritos }}
+      </span>
+      <Heart class="w-5 h-5 fill-current "/>
+     </RouterLink>
   </Button>
 
 <!-- <Button variant="domus" class="mr-2" >
