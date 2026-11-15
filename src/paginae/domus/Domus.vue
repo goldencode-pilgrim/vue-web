@@ -1,12 +1,57 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { ref } from 'vue';
+
+const dialogApertaEst = ref<boolean>(false)
+
+const quaestio =ref<string>("")
+
 
 </script>
 
 <template>
   <!-- Este apartado me divide el bloque "fondo-home" que es donde se ubican los links a las otras páginas. -->
   <div class="bg-black flex-gap 4 justify-center ">
-  <Button  variant="domus" class="mr-2">
+ 
+     <Dialog
+     :open="dialogApertaEst"
+     @update:open="dialogApertaEst = $event"
+     >
+      <DialogTrigger as-child>
+        <Button variant="domus" class="mr-2">
+          Sí o no
+        </Button>
+      </DialogTrigger>
+      <DialogContent class="sm:max-w-[425px] bg-domus-navy text-white border-domus-cyan">
+        <DialogHeader>
+          <DialogTitle>Pregúntame</DialogTitle>
+          <DialogDescription class="text-gray-300" >
+            No sigas con tus dudas, yo te responderé SÍ o NO.
+          </DialogDescription>
+        </DialogHeader>
+          <div class="mt-4 ">
+            <Input 
+            class="bg-domus-navy-input text-white placeholder:text-gray-400" 
+            placeholder="Escribe aquí tu pregunta..."
+            v-model="quaestio"
+            />
+
+          </div>
+        
+      </DialogContent>
+     </Dialog>
+
+
+    <Button  variant="domus" class="mr-2">
   <RouterLink to='/Pavlvs'>Pavlvs</RouterLink>
   </Button>
   
@@ -19,9 +64,9 @@ import Button from '@/components/ui/button/Button.vue';
     <a href='https://catholic.net/'>Catholicnet</a>
   </Button>
 
-<Button variant="domus" class="mr-2" >
+<!-- <Button variant="domus" class="mr-2" >
 <RouterLink to='/dubitatio'>?</RouterLink>
-</Button>
+</Button> -->
 
   </div>
 
